@@ -1,29 +1,15 @@
 # contact-app
+A contact SPA made in Vue :)
 
-## Project setup
-```
-yarn install
-```
+# Project Setup?
+|Index|Command|
+|---|---|
+|0|clone this repo to your system|
+|1|cd contact-app && yarn install|
+|2|yarn serve|
+|3|done :)|
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Todos
+- [X] Search contact.
+- [ ] Add contact.
