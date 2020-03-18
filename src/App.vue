@@ -29,5 +29,6 @@ body {
 #app {
   width: 80%;
   margin: 50px auto;
+  margin-bottom: 0;
 }
 </style>

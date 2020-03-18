@@ -12,20 +12,22 @@
         Contacts
       </p>
     </div>
-    <div class="mb-4">
+    <div class="mb-4 relative">
       <input
-        class="shadow-md mb-4 pl-4 w-full outline-none rounded-lg m-1 p-2"
-        placeholder="Search..."
+        class="search-box shadow-md mb-4 pl-4 pr-4 p-2 w-full outline-none rounded-lg"
         type="text"
+        placeholder="Search"
         autofocus
         v-model="searchTerm"
       />
+      <p>Showing {{ count }} contacts</p>
     </div>
     <div class="contact-list">
       <list
-        v-for="(contact, index) in filteredContacts"
-        :key="index"
+        v-for="contact in filteredContacts"
+        :key="contact.id"
         :contact="contact"
+        @delete="deleteContact"
       ></list>
     </div>
   </div>
@@ -44,17 +46,26 @@ export default {
     };
   },
   created() {
-    axios.get("https://jsonplaceholder.typicode.com/users").then(({ data }) => {
-      this.contacts = data;
-    });
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then(({ data }) => (this.contacts = data));
   },
   computed: {
+    count() {
+      return this.filteredContacts.length;
+    },
     filteredContacts() {
       return this.contacts.filter(contact => {
         return contact.name
           .toLowerCase()
           .includes(this.searchTerm.toLowerCase());
       });
+    }
+  },
+  methods: {
+    deleteContact(id) {
+      let _contacts = [...this.contacts];
+      this.contacts = _contacts.filter(contact => contact.id != id);
     }
   },
   components: {
@@ -75,5 +86,21 @@ export default {
 .contact-list {
   max-height: calc(100vh - 250px);
   overflow: auto;
+}
+.search-label {
+  top: 12px;
+  left: 20px;
+  font-size: 14px;
+  transition: all 0.1s ease;
+}
+.search-box:focus + .search-label {
+  top: -21px;
+  left: 6px;
+  font-size: 16px;
+}
+.search-box:valid + .search-label {
+  top: -21px;
+  left: 6px;
+  font-size: 16px;
 }
 </style>
