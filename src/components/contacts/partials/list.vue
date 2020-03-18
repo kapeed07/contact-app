@@ -1,13 +1,11 @@
 <template>
   <div>
     <div
-      @mousemove="isHover = true"
-      @mouseleave="isHover = false"
-      class="flex justify-between items-center shadow text-indigo-900 w-full border bg-indigo-200 border-indigo-500 p-2 mb-3 rounded"
+      :class="`flex justify-between hover:shadow-xl items-center shadow text-gray-900 w-full border border-${color}-600 bg-${color}-200 p-3 pl-5 mb-3 rounded-md`"
     >
       <div class="flex">
         <div
-          class="circle w-6 h-6 bg-gray-200 border border-gray-500 rounded-full"
+          :class="`circle w-6 h-6 bg-${color}-300 border border-${color}-500 rounded-full`"
         >
           <img :src="`https://robohash.org/${contact.username}`" alt="" />
         </div>
@@ -17,11 +15,11 @@
       <p>{{ contact.phone }}</p>
 
       <span class="action-buttons">
-        <div v-if="isHover">
-          <i
-            @click="$emit('delete', contact.id)"
-            class="cursor-pointer text-red-600 far fa-trash-alt"
-          ></i>
+        <div>
+          <!-- @click="$emit('delete', contact.id)" -->
+          <!-- <i
+            class="cursor-pointer fas fa-ellipsis-v"
+          ></i> -->
         </div>
       </span>
     </div>
@@ -34,8 +32,8 @@ export default {
   props: ["contact"],
   data() {
     return {
-      isHover: false
-    };
+      color: "pink"
+    }
   }
 };
 </script>
