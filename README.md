@@ -1,6 +1,8 @@
 # contact-app
 A contact SPA made in Vue :)
 
+![Image description](https://github.com/kapeed07/contact-app/blob/master/src/assets/icon.png)
+
 # Project Setup?
 |Index|Command|
 |---|---|
