@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1>Contacts</h1>
+    <p class="text-4xl tracking-widest font-mono  uppercase text-center text-gray-800">Contacts</p>
+    <input class="shadow-md mb-4 pl-4 w-full outline-none rounded-lg m-1 p-2" placeholder="Search..." type="text" v-model="searchTerm">
     <list
-      v-for="(contact, index) in contacts"
+      v-for="(contact, index) in filteredContacts"
       :key="index"
       :contact="contact"
     ></list>
@@ -10,25 +11,29 @@
 </template>
 
 <script>
+import axios from "axios";
 import List from "./partials/list";
 
 export default {
   name: "contact-index",
   data() {
     return {
-      contacts: [
-        {
-          first_name: "Deepak",
-          last_name: "Bhardwaj",
-          mobile: "9953575646"
-        },
-        {
-          first_name: "Kapeed",
-          last_name: "Bhardwaj",
-          mobile: "9999999999"
-        }
-      ]
+      searchTerm: "",
+      contacts: []
     };
+  },
+  created() {
+    axios.get("https://jsonplaceholder.typicode.com/users")
+    .then(({data}) => {
+      this.contacts = data;
+    })
+  },
+  computed: {
+    filteredContacts() {
+      return this.contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      })
+    }
   },
   components: {
     List

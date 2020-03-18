@@ -15,6 +15,9 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: rgb(241, 241, 239);
+}
 #app {
   width: 80%;
   margin: 50px auto;
